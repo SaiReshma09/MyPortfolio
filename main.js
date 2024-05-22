@@ -1,69 +1,57 @@
-// function scrollToSection(sectionId) {
-//     const section = document.getElementById(sectionId);
-//     section.scrollIntoView({ behavior: 'smooth' });
-// }
-
-/*toggle icon navbar */
+/* Toggle icon navbar */
 
 let menuIcon = document.querySelector('#menu-icon');
 let navbar = document.querySelector('.navbar');
 
 menuIcon.onclick = () => {
-    menuIcon.classList.toggle('fa-solid fa-x');
-    navbar.classList.toggle('active')
+    menuIcon.classList.toggle('fa-x');
+    navbar.classList.toggle('active');
 }
 
+/* Scroll section active link */
 
-/*scroll section active link */
-
-let sections = document.querySelector('section');
-let navLinks = document.querySelector('header nav a');
+let sections = document.querySelectorAll('section');
+let navLinks = document.querySelectorAll('header nav a');
 
 window.onscroll = () => {
+    let top = window.scrollY;
+
     sections.forEach(sec => {
-        let top = window.scrollY;
-        let offset = sec.offsetTop -150;
-        let height = sec.offsecHeight;
+        let offset = sec.offsetTop - 150;
+        let height = sec.offsetHeight;
         let id = sec.getAttribute('id');
 
-        if(top >= offset && top < offset + height) {
-            navLinks.forEach.apply(links => {
-                links.classList.remove('active');
-                document.querySelector('header nav a[href*=' + id +']').classList.add('active');
+        if (top >= offset && top < offset + height) {
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                document.querySelector(`header nav a[href*=${id}]`).classList.add('active');
             });
-
-        };
+        }
     });
 
-
-    /*sticky navbar */
-
+    /* Sticky navbar */
     let header = document.querySelector('header');
     header.classList.toggle('sticky', window.scrollY > 100);
 
-
-    /*remove toggle icon and navbar */
-    menuIcon.classList.remove('fa-solid fa-x');
+    /* Remove toggle icon and navbar when a section is clicked */
+    menuIcon.classList.remove('fa-x');
     navbar.classList.remove('active');
-
 };
 
+/* Scroll reveal */
 
-/*scroll reveal */
-
-ScrollReveal({ 
+ScrollReveal({
     distance: '80px',
     duration: 2000,
     delay: 200,
- });
+});
 
- ScrollReveal().reveal('.home-content, heading', { origin: 'top'});
- ScrollReveal().reveal('.home-img, .services-container, .portfolio-box, .contact form', { origin: 'button'});
- ScrollReveal().reveal('.home-content h1, .about-img', { origin: 'left'});
- ScrollReveal().reveal('.home-content p, .about-content', { origin: 'right'});
+ScrollReveal().reveal('.home-content, .heading', { origin: 'top' });
+ScrollReveal().reveal('.home-img, .services-container, .portfolio-box, .contact form', { origin: 'bottom' });
+ScrollReveal().reveal('.home-content h1, .about-img', { origin: 'left' });
+ScrollReveal().reveal('.home-content p, .about-content', { origin: 'right' });
 
-
-/*Typed JS*/
+/* Typed JS */
 const typed = new Typed('.multiple-text', {
     strings: ['Software Engineer', 'Frontend Developer', 'Software Developer'],
     typeSpeed: 70,
